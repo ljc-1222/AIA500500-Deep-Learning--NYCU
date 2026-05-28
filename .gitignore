@@ -30,6 +30,16 @@ logs/
 **/logs/
 eval_videos/
 **/eval_videos/
+outputs/
+**/outputs/
+
+# Local datasets and model checkpoints
+data/
+**/data/
+checkpoints/
+**/checkpoints/
+*.pt
+*.pth
 
 # Compressed archives and local video artifacts
 *.zip
@@ -37,6 +47,7 @@ eval_videos/
 *.tar.gz
 *.tgz
 *.7z
+*.mp4
 *.avi
 *.mov
 
