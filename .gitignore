@@ -1,0 +1,44 @@
+# Python bytecode and native extension outputs
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.so
+
+# Local Python environments and environment variable files
+.venv/
+**/.venv/
+.env
+.env.*
+
+# Notebook, test, type-check, and lint caches
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS and Windows alternate data stream metadata
+.DS_Store
+Thumbs.db
+*Zone.Identifier
+*.Identifier
+
+# Experiment tracking and generated evaluation videos
+wandb/
+**/wandb/
+logs/
+**/logs/
+eval_videos/
+**/eval_videos/
+
+# Compressed archives and local video artifacts
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.avi
+*.mov
+
+# Other
+*.docx
