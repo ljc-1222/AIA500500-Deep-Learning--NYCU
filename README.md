@@ -2,52 +2,31 @@
 
 ## Course Information
 
-- Course: Deep Learning
-- Term: Spring 2026
-- School: National Yang Ming Chiao Tung University
-- Language: English
-- Evaluation from syllabus: 4 homework assignments, 80%; final exam, 20%.
-- Hardware requirement from syllabus: GPU access with at least 6 GB memory.
+- **Course:** AIA500500 Deep Learning
+- **Language:** Python
+- **Term:** 2026 Spring
+- **Repository scope:** hw00-hw03 source code, provided assignment handouts, course slides, submitted reports, and selected generated results.
 
-This repository collects local course materials, assignment source code, reports, trained artifacts, and generated outputs for the Deep Learning course. The organized homework directories use a shared structure: `src/`, `docs/`, `data/`, `checkpoints/`, `outputs/`, and `logs/` when applicable.
+This repository collects the programming assignments for the Deep Learning course. The included work covers PyTorch warm-up material, convolutional neural networks for semantic segmentation, value-based reinforcement learning with DQN variants, and conditional diffusion models for image generation.
 
 ## Repository Layout
 
-| Path | Topic | Main contents |
+| Path | Topic | Main files |
 | --- | --- | --- |
-| `hw00/` | PyTorch warm-up material | Provided hw00 PDFs. |
-| `hw01/` | hw01, Convolutional Nets | Oxford-IIIT Pet semantic segmentation with UNet and ResNet34UNet. |
-| `hw02/` | hw02, Value-Based Reinforcement Learning | DQN for CartPole and Pong, plus Double DQN, PER, and multi-step returns. |
-| `hw03/` | hw03, Generative Models | Conditional DDPM for i-CLEVR image generation. |
-| `slides/` | Lecture slides | Course lecture PDFs from introduction through reinforcement learning. |
-| `Syllabus.pdf` | Course syllabus | Course schedule, grading policy, and requirements. |
+| `hw00/` | PyTorch warm-up and course preparation material. | provided warm-up PDFs |
+| `hw01/` | Convolutional Nets: Oxford-IIIT Pet semantic segmentation with UNet and ResNet34UNet. | `src/train.py`, `src/inference.py`, `src/models/`, `docs/hw01_asignment.pdf` |
+| `hw02/` | Value-Based Reinforcement Learning: DQN for CartPole and Pong, plus Double DQN, PER, and n-step returns. | `src/train_task1_cartpole.py`, `src/train_task2_pong_dqn.py`, `src/train_task3_pong_enhanced.py`, `src/eval_pong.py` |
+| `hw03/` | Generative Models: conditional DDPM for i-CLEVR image generation. | `src/train.py`, `src/test.py`, `src/model.py`, `src/evaluator.py` |
+| `slides/` | Course lecture slides. | `L01-Introduction.pdf` through `L17-Model-Based-Reinforcement-Learning.pdf` |
+| `Syllabus.pdf` | Course syllabus. | provided syllabus PDF |
 
-## Homework Layout Convention
+## Requirements
 
-Each organized homework uses these paths as consistently as the original artifacts allow:
+- Python 3.12 or newer is recommended.
+- A POSIX-like shell is useful for the example commands below.
+- Each homework directory keeps its own `requirements.txt`.
 
-| Path | Meaning |
-| --- | --- |
-| `README.md` | Assignment-specific summary, layout, environment, commands, and current artifacts. |
-| `src/` | Source code and runnable scripts. |
-| `docs/` | Assignment handouts, reports, slides, videos, and submission archives. |
-| `data/` | Local datasets and metadata files. |
-| `checkpoints/` | Model checkpoints and checkpoint-side training records. |
-| `outputs/` | Generated figures, videos, submissions, and sample outputs. |
-| `logs/` | Training logs such as W&B run directories. |
-| `requirements.txt` | Assignment-specific Python dependencies, when available. |
-
-## Assignments
-
-| Homework | Assignment | Summary | README |
-| --- | --- | --- | --- |
-| `hw01/` | hw01: Convolutional Nets | Binary pet-mask segmentation with UNet and ResNet34UNet. | `hw01/README.md` |
-| `hw02/` | hw02: Value-Based RL | DQN on CartPole and Pong; enhanced Pong DQN with Double DQN, PER, and n-step returns. | `hw02/README.md` |
-| `hw03/` | hw03: Generative Models | Conditional DDPM on i-CLEVR with evaluator-based accuracy. | `hw03/README.md` |
-
-## Environment
-
-Use the assignment-specific environment file when running code:
+Install packages for the homework you want to run:
 
 ```sh
 cd hw01
@@ -70,8 +49,55 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-The local `.venv/` folders are kept in each homework directory for convenience but are ignored by Git.
+## Run Examples
 
-## Artifact Policy
+For hw01 segmentation:
 
-Large datasets, trained checkpoints, generated outputs, W&B logs, videos, and submission archives are organized in the relevant homework folders. They are intentionally excluded by `.gitignore` patterns so source code and documentation can remain reviewable without committing heavy experiment artifacts.
+```sh
+cd hw01
+python -m src.train --model-name UNet --device cuda --num-epochs 250 --batch-size 16
+python -m src.inference --model-name ResNet34UNet --timestamp 20260331-094415 --use-swa
+```
+
+For hw02 reinforcement learning:
+
+```sh
+cd hw02
+python src/train_task1_cartpole.py
+python src/eval_cartpole.py --model-path checkpoints/hw02_task1.pt
+python src/train_task3_pong_enhanced.py
+python src/eval_pong.py --model-path checkpoints/hw02_task3_best.pt
+```
+
+For hw03 conditional diffusion:
+
+```sh
+cd hw03
+python src/train.py --batch-size 64 --epochs 100 --accum-grad 1 --wandb-mode online
+python src/test.py --checkpoint-path checkpoints/<ddpm_checkpoint>.pth
+```
+
+## Data and Outputs
+
+- `hw01/data/oxford-iiit-pet/` contains the Oxford-IIIT Pet dataset layout used by `hw01/src/`.
+- `hw01/checkpoints/` stores segmentation checkpoints, training records, plots, configs, and generated submission CSV files.
+- `hw02/checkpoints/` stores submitted DQN model snapshots.
+- `hw02/outputs/results/` stores generated reinforcement-learning outputs and rendered videos.
+- `hw03/data/` contains i-CLEVR images and metadata JSON files.
+- `hw03/checkpoints/evaluator/` contains the evaluator checkpoint used by `hw03/src/evaluator.py`.
+- `hw03/outputs/images/` stores generated images and image grids.
+- `slides/` stores course lecture PDFs.
+
+## File Naming Notes
+
+- `hwxx/README.md` files summarize each homework directory.
+- `src/` contains runnable source code.
+- `docs/` contains assignment handouts, reports, and notes.
+- `data/` contains local datasets or metadata files.
+- `checkpoints/` contains model checkpoints and checkpoint-side records.
+- `outputs/` contains generated images, videos, figures, or submissions.
+- `logs/` contains local training logs.
+
+## Course Scope Note
+
+The course includes four homework assignments. This repository currently includes hw00 preparation material and organized homework directories through `hw03/`.
