@@ -5,7 +5,7 @@
 - **Course:** AIA500500 Deep Learning
 - **Language:** Python
 - **Term:** 2026 Spring
-- **Repository scope:** hw00-hw03 source code, provided assignment handouts, course slides, submitted reports, and selected generated results.
+- **Repository scope:** hw00-hw03 source code, provided assignment handouts, course slides, final exam PDFs, submitted reports, and selected generated results.
 
 This repository collects the programming assignments for the Deep Learning course. The included work covers PyTorch warm-up material, convolutional neural networks for semantic segmentation, value-based reinforcement learning with DQN variants, and conditional diffusion models for image generation.
 
@@ -18,6 +18,7 @@ This repository collects the programming assignments for the Deep Learning cours
 | `hw02/` | Value-Based Reinforcement Learning: DQN for CartPole and Pong, plus Double DQN, PER, and n-step returns. | `src/train_task1_cartpole.py`, `src/train_task2_pong_dqn.py`, `src/train_task3_pong_enhanced.py`, `src/eval_pong.py` |
 | `hw03/` | Generative Models: conditional DDPM for i-CLEVR image generation. | `src/train.py`, `src/test.py`, `src/model.py`, `src/evaluator.py` |
 | `slides/` | Course lecture slides. | `L01-Introduction.pdf` through `L17-Model-Based-Reinforcement-Learning.pdf` |
+| `final exam/` | Final exam reference PDFs. | `DLP_2020_spring_final_exam.pdf` through `DLP_2025_spring_final_exam.pdf` |
 | `Syllabus.pdf` | Course syllabus. | provided syllabus PDF |
 
 ## Requirements
@@ -87,6 +88,7 @@ python src/test.py --checkpoint-path checkpoints/<ddpm_checkpoint>.pth
 - `hw03/checkpoints/evaluator/` contains the evaluator checkpoint used by `hw03/src/evaluator.py`.
 - `hw03/outputs/images/` stores generated images and image grids.
 - `slides/` stores course lecture PDFs.
+- `final exam/` stores final exam reference PDFs.
 
 ## File Naming Notes
 
@@ -100,4 +102,4 @@ python src/test.py --checkpoint-path checkpoints/<ddpm_checkpoint>.pth
 
 ## Course Scope Note
 
-The course includes four homework assignments. This repository currently includes hw00 preparation material and organized homework directories through `hw03/`.
+The course includes four homework assignments. This repository currently includes hw00 preparation material, organized homework directories through `hw03/`, course slides, and final exam reference PDFs.
